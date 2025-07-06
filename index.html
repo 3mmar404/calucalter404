@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator 404 - حاسبة قطونيل الذكية</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        accent: '#0ea5e9',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-cairo">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white dark:bg-gray-800 shadow-xl py-4 sticky top-0 z-10 rounded-b-2xl transition-all">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-primary w-12 h-12 rounded-2xl flex items-center justify-center shadow-xl overflow-hidden">
+                        <img src="assets/logo.svg" alt="Logo" class="w-10 h-10 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">حاسبة قطونيل الذكية</h1>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Calculator 404</p>
+                    </div>
+                </div>
+                <button id="themeToggle" class="bg-gray-200 dark:bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center btn transition-all hover:scale-105">
+                    <i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </header>
+        <main class="flex-grow container mx-auto px-2 sm:px-4 py-6">
+            <!-- Tabs Navigation -->
+            <nav class="flex overflow-x-auto mb-6 border-b border-gray-200 dark:border-gray-700">
+                <button data-tab="calculator" class="tab-btn active px-4 py-3 font-medium border-b-2 border-primary text-primary whitespace-nowrap transition-all">الحاسبة</button>
+                <button data-tab="inventory" class="tab-btn px-4 py-3 font-medium whitespace-nowrap transition-all">جرد الكاش</button>
+                <button data-tab="formulas" class="tab-btn px-4 py-3 font-medium whitespace-nowrap transition-all">معادلات</button>
+                <button data-tab="roi" class="tab-btn px-4 py-3 font-medium whitespace-nowrap transition-all">ROI التسويق</button>
+                <button data-tab="shift" class="tab-btn px-4 py-3 font-medium whitespace-nowrap transition-all">تقفيل الوردية</button>
+            </nav>
+            <div class="tab-content">
+                <!-- Calculator Tab -->
+                <section id="calculator" class="tab-pane active">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-center">الحاسبة</h2>
+                        <div class="calculator-display mb-4">
+                            <div id="calcExpression" class="text-right text-sm text-gray-500 dark:text-gray-400 h-6"></div>
+                            <input type="text" id="calcDisplay" class="w-full text-right text-2xl font-mono p-4 rounded-lg border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:border-primary transition-all" readonly value="0">
+                        </div>
+                        <div id="calcButtons" class="grid grid-cols-4 gap-3">
+                            <button class="btn-calc col-span-2 bg-red-500 text-white p-4 rounded-lg font-bold hover:bg-red-600 transition-all" data-op="C">مسح</button>
+                            <button class="btn-calc bg-yellow-500 text-white p-4 rounded-lg font-bold hover:bg-yellow-600 transition-all" data-op="backspace">←</button>
+                            <button class="btn-calc bg-primary text-white p-4 rounded-lg font-bold hover:bg-blue-600 transition-all" data-value="/">/</button>
+                            
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="7">7</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="8">8</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="9">9</button>
+                            <button class="btn-calc bg-primary text-white p-4 rounded-lg font-bold hover:bg-blue-600 transition-all" data-value="*">×</button>
+                            
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="4">4</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="5">5</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="6">6</button>
+                            <button class="btn-calc bg-primary text-white p-4 rounded-lg font-bold hover:bg-blue-600 transition-all" data-value="-">-</button>
+                            
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="1">1</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="2">2</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="3">3</button>
+                            <button class="btn-calc bg-primary text-white p-4 rounded-lg font-bold hover:bg-blue-600 transition-all" data-value="+">+</button>
+                            
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="%">%</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value="0">0</button>
+                            <button class="btn-calc bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 p-4 rounded-lg font-bold hover:bg-gray-400 transition-all" data-value=".">.</button>
+                            <button class="btn-calc bg-green-500 text-white p-4 rounded-lg font-bold hover:bg-green-600 transition-all" data-op="=">=</button>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold">السجل</h3>
+                            <button id="clearHistoryBtn" class="btn bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-all">مسح السجل</button>
+                        </div>
+                        <div id="historyList" class="space-y-2 max-h-40 overflow-y-auto">
+                            <p class="text-gray-500 text-center py-4">لا توجد عمليات محفوظة</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Inventory Tab -->
+                <section id="inventory" class="tab-pane">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-center">جرد الكاش</h2>
+                        <div class="space-y-4">
+                            <div id="denominationContainer" class="space-y-3">
+                                <!-- سيتم إضافة الفئات هنا بواسطة JavaScript -->
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                            <div class="text-center">
+                                <span class="text-lg font-bold">الإجمالي: </span>
+                                <span id="inventoryTotal" class="text-2xl font-bold text-primary">0 جنيه</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <p class="mb-4 text-lg">هل الجرد صحيح؟</p>
+                            <div class="flex justify-center gap-4">
+                                <button id="inventoryYes" class="btn bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-all">نعم</button>
+                                <button id="inventoryNo" class="btn bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-all">لا</button>
+                            </div>
+                        </div>
+                        <div id="discrepancySection" class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg hidden">
+                            <h3 class="font-bold mb-3">فحص الفرق</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">المبلغ المتوقع:</label>
+                                    <input type="number" id="expectedAmount" class="input-field w-full" placeholder="أدخل المبلغ المتوقع">
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-white dark:bg-gray-800 rounded-lg">
+                                    <span>الفرق:</span>
+                                    <span id="differenceAmount" class="font-bold">0 جنيه</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Formulas Tab -->
+                <section id="formulas" class="tab-pane">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- حاسبة الجملة -->
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                            <h2 class="text-xl font-bold mb-4 text-center">حاسبة الجملة</h2>
+                            <form id="wholesaleForm" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">سعر القطعة:</label>
+                                    <input type="number" id="piecePrice" class="input-field w-full" placeholder="أدخل سعر القطعة" step="0.01" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">نسبة الخصم (%):</label>
+                                    <input type="number" id="discountPercent" class="input-field w-full" placeholder="أدخل نسبة الخصم" step="0.1" min="0" max="100" value="0">
+                                </div>
+                                <button type="submit" class="btn bg-primary text-white w-full py-3 rounded-lg hover:bg-blue-600 transition-all">احسب سعر الجملة</button>
+                            </form>
+                            <div id="wholesaleResultWrapper" class="mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hidden">
+                                <div class="text-center">
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">سعر الجملة:</span>
+                                    <div id="wholesaleResult" class="text-2xl font-bold text-green-600 dark:text-green-400"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- محول القطع -->
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                            <h2 class="text-xl font-bold mb-4 text-center">محول القطع</h2>
+                            <form id="conversionForm" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">عدد القطع:</label>
+                                    <input type="number" id="piecesInput" class="input-field w-full" placeholder="أدخل عدد القطع" min="1" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">الوحدة:</label>
+                                    <select id="unitSize" class="input-field w-full" required>
+                                        <option value="12">دستة (12 قطعة)</option>
+                                        <option value="6">نص دستة (6 قطع)</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn bg-primary text-white w-full py-3 rounded-lg hover:bg-blue-600 transition-all">تحويل</button>
+                            </form>
+                            <div id="conversionResultWrapper" class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hidden">
+                                <div class="text-center">
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">النتيجة:</span>
+                                    <div id="conversionResult" class="text-2xl font-bold text-blue-600 dark:text-blue-400"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ROI Tab -->
+                <section id="roi" class="tab-pane">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-center">حاسبة ROI التسويق</h2>
+                        <form id="roiForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">تكلفة الحملة الإعلانية:</label>
+                                <input type="number" id="campaignCost" class="input-field w-full" placeholder="أدخل تكلفة الحملة" step="0.01" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">سعر البيع للقطعة:</label>
+                                <input type="number" id="sellingPrice" class="input-field w-full" placeholder="أدخل سعر البيع" step="0.01" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">تكلفة القطعة:</label>
+                                <input type="number" id="costPrice" class="input-field w-full" placeholder="أدخل تكلفة القطعة" step="0.01" required>
+                            </div>
+                            <button type="submit" class="btn bg-primary text-white w-full py-3 rounded-lg hover:bg-blue-600 transition-all">احسب ROI</button>
+                        </form>
+                        <div id="roiResults" class="mt-6 space-y-4 hidden">
+                            <h3 class="font-bold text-lg">النتائج:</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">المبيعات المطلوبة:</span>
+                                    <div id="requiredSales" class="text-xl font-bold text-blue-600 dark:text-blue-400"></div>
+                                </div>
+                                <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                                    <span class="text-sm text-gray-600 dark:text-gray-400">عدد القطع المطلوبة:</span>
+                                    <div id="requiredPieces" class="text-xl font-bold text-green-600 dark:text-green-400"></div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                                <span class="text-sm text-gray-600 dark:text-gray-400">هامش الربح:</span>
+                                <div id="profitMargin" class="text-xl font-bold text-yellow-600 dark:text-yellow-400"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Shift Tab -->
+                <section id="shift" class="tab-pane">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-center">تقفيل الوردية</h2>
+                        <form id="shiftForm" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="space-y-4">
+                                    <h3 class="font-bold text-lg text-green-600 dark:text-green-400">الإيرادات</h3>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">الحصالة في بداية الوردية:</label>
+                                        <input type="number" id="cashBox" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">مبيعات كاش:</label>
+                                        <input type="number" id="cashSales" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">إيرادات أخرى:</label>
+                                        <input type="number" id="otherIncome" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3 class="font-bold text-lg text-red-600 dark:text-red-400">المصروفات</h3>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">مصروفات:</label>
+                                        <input type="number" id="expenses" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">خصومات:</label>
+                                        <input type="number" id="discounts" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-1">مدفوعات فيزا:</label>
+                                        <input type="number" id="visaPayments" class="input-field w-full" placeholder="0" step="0.01" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn bg-primary text-white w-full py-3 rounded-lg hover:bg-blue-600 transition-all">احسب النتائج</button>
+                        </form>
+                    </div>
+                    <div id="shiftResults" class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 hidden">
+                        <!-- سيتم إضافة النتائج هنا بواسطة JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer class="text-sm text-center text-gray-500 dark:text-gray-400 py-4 mt-auto rounded-t-2xl transition-all">
+            © 2025 – <span class="text-primary font-semibold">BY AMAR</span> | النسخة: قطونيل أبراج النصر
+        </footer>
+    </div>
+    <!-- ربط جميع ملفات JS بشكل منظم -->
+    <script src="js/core.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/formulas.js"></script>
+    <script src="js/roi.js"></script>
+    <script src="js/shift.js"></script>
+    <script src="js/reset.js"></script>
+    <!-- كود تفعيل الدارك مود وتبديله -->
+    <script>
+      // تفعيل الدارك مود حسب LocalStorage أو النظام
+      function setDarkMode(enabled) {
+        if (enabled) {
+          document.body.classList.add('dark');
+          document.documentElement.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      // قراءة الوضع من LocalStorage أو النظام
+      const userTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(userTheme === 'dark' || (!userTheme && systemDark));
+      // زر التبديل
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        const isDark = document.body.classList.contains('dark');
+        setDarkMode(!isDark);
+        localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

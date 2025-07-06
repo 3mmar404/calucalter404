@@ -1,0 +1,18 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="56" fill="#fff"/>
+  <rect x="24" y="24" width="208" height="208" rx="40" fill="#dc2626"/>
+  <rect x="48" y="56" width="160" height="144" rx="24" fill="#fff"/>
+  <!-- شاشة الآلة الحاسبة -->
+  <rect x="68" y="72" width="120" height="36" rx="8" fill="#0ea5e9"/>
+  <!-- أزرار -->
+  <circle cx="84" cy="132" r="12" fill="#e5e7eb"/>
+  <circle cx="128" cy="132" r="12" fill="#e5e7eb"/>
+  <circle cx="172" cy="132" r="12" fill="#e5e7eb"/>
+  <circle cx="84" cy="172" r="12" fill="#e5e7eb"/>
+  <circle cx="128" cy="172" r="12" fill="#e5e7eb"/>
+  <circle cx="172" cy="172" r="12" fill="#e5e7eb"/>
+  <!-- الرقم 404 -->
+  <text x="50%" y="110" text-anchor="middle" font-family="Cairo, Arial, sans-serif" font-size="32" font-weight="bold" fill="#fff" letter-spacing="2">404</text>
+  <!-- لمسة مصرية: خط أسود أسفل الآلة الحاسبة -->
+  <rect x="48" y="200" width="160" height="8" rx="4" fill="#222"/>
+</svg>
