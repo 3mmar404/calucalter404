@@ -36,4 +36,4 @@ calculator-404/
 - لا يحتاج لأي باك-إند أو مكتبات خارجية (فقط Tailwind عبر CDN)
 
 ## حقوق النشر
-© 2024 Calculator 404
+© 2025 Calculator 404
