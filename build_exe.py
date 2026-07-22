@@ -33,7 +33,7 @@ def build_exe():
         "pyinstaller",
         "--onefile",  # ملف واحد
         "--windowed",  # بدون console
-        "--name=Calculator404",  # اسم الملف
+        "--name=SmartCalcPro",  # اسم الملف
         "--icon=assets/favicon.ico" if os.path.exists("assets/favicon.ico") else "",
         "--distpath=dist",  # مجلد الإخراج
         "--specpath=build",  # مجلد البناء
@@ -47,7 +47,7 @@ def build_exe():
     try:
         subprocess.check_call(cmd)
         print("✅ تم بناء ملف exe بنجاح!")
-        print(f"📁 يمكنك العثور على الملف في: {os.path.abspath('dist/Calculator404.exe')}")
+        print(f"📁 يمكنك العثور على الملف في: {os.path.abspath('dist/SmartCalcPro.exe')}")
         return True
     except subprocess.CalledProcessError as e:
         print(f"❌ فشل في بناء ملف exe: {e}")
@@ -64,7 +64,7 @@ def main():
         return
     
     print("\n🎉 تم الانتهاء من بناء التطبيق بنجاح!")
-    print("💡 يمكنك الآن تشغيل Calculator404.exe من مجلد dist")
+    print("💡 يمكنك الآن تشغيل SmartCalcPro.exe من مجلد dist")
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,4 @@
-/* تحسين شامل لتجربة المستخدم وواجهة Calculator 404 */
+/* SmartCalc Pro — UI & UX styles (light / dark) */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 html { scroll-behavior: smooth; }
 body {
@@ -26,11 +26,11 @@ main, .tab-content, #shiftResults, .card, .bg-white {
   display: block;
 }
 
-body.dark, html.dark {
+.dark, html.dark {
   background: #0f172a !important;
   color: #e2e8f0 !important;
 }
-body.dark main, body.dark .tab-content, body.dark #shiftResults, body.dark .card, body.dark .bg-white {
+.dark main, .dark .tab-content, .dark #shiftResults, .dark .card, .dark .bg-white {
   background: #1e293b !important;
   color: #e2e8f0 !important;
   border: 1px solid #334155 !important;
@@ -42,9 +42,9 @@ body, html { color: #334155; }
 .text-primary { color: #2563eb !important; }
 .text-secondary, .text-gray-500 { color: #64748b !important; }
 .text-title, h1, h2, h3 { color: #1e293b !important; }
-body.dark .text-title, body.dark h1, body.dark h2, body.dark h3 { color: #f1f5f9 !important; }
-body.dark .text-primary { color: #3b82f6 !important; }
-body.dark .text-secondary, body.dark .text-gray-500 { color: #94a3b8 !important; }
+.dark .text-title, .dark h1, .dark h2, .dark h3 { color: #f1f5f9 !important; }
+.dark .text-primary { color: #3b82f6 !important; }
+.dark .text-secondary, .dark .text-gray-500 { color: #94a3b8 !important; }
 
 /* العناوين */
 h1, h2, h3 {
@@ -53,7 +53,7 @@ h1, h2, h3 {
   margin-bottom: 1.25rem;
   color: #1e293b;
 }
-body.dark h1, body.dark h2, body.dark h3 { color: #f1f5f9; }
+.dark h1, .dark h2, .dark h3 { color: #f1f5f9; }
 
 /* الحقول */
 .input-field, .denomination-input {
@@ -70,12 +70,12 @@ body.dark h1, body.dark h2, body.dark h3 { color: #f1f5f9; }
   color: #1e293b;
   border-color: #2563eb;
 }
-body.dark .input-field, body.dark .denomination-input {
+.dark .input-field, .dark .denomination-input {
   background: #1e293b !important;
   color: #f8fafc !important;
   border: 1px solid #475569 !important;
 }
-body.dark .input-field:focus, body.dark .denomination-input:focus {
+.dark .input-field:focus, .dark .denomination-input:focus {
   background: #334155 !important;
   color: #fff !important;
   border-color: #3b82f6 !important;
@@ -101,11 +101,11 @@ body.dark .input-field:focus, body.dark .denomination-input:focus {
 .btn.bg-primary:hover, .btn-calc.bg-primary:hover {
   background: #60a5fa !important;
 }
-body.dark .btn.bg-primary, body.dark .btn-calc.bg-primary {
+.dark .btn.bg-primary, .dark .btn-calc.bg-primary {
   background: #3b82f6 !important;
   color: #fff !important;
 }
-body.dark .btn.bg-primary:hover, body.dark .btn-calc.bg-primary:hover {
+.dark .btn.bg-primary:hover, .dark .btn-calc.bg-primary:hover {
   background: #60a5fa !important;
 }
 
@@ -128,11 +128,11 @@ body.dark .btn.bg-primary:hover, body.dark .btn-calc.bg-primary:hover {
   font-weight: 700;
   box-shadow: 0 2px 8px 0 #0001;
 }
-body.dark .tab-btn {
+.dark .tab-btn {
   background: #1e293b !important;
   color: #3b82f6 !important;
 }
-body.dark .tab-btn.active {
+.dark .tab-btn.active {
   background: #1e293b !important;
   color: #60a5fa !important;
   border-bottom: 3px solid #60a5fa !important;
@@ -147,10 +147,10 @@ footer, .footer {
   background: transparent;
 }
 footer .text-primary { color: #2563eb !important; font-weight: 600; }
-body.dark footer, body.dark .footer {
+.dark footer, .dark .footer {
   color: #94a3b8 !important;
 }
-body.dark footer .text-primary { color: #3b82f6 !important; }
+.dark footer .text-primary { color: #3b82f6 !important; }
 
 /* تحسينات عامة */
 .text-lg { font-size: 1.25rem !important; }
@@ -651,3 +651,7 @@ a:hover {
     padding: 0.5rem;
   }
 }
+
+/* Anti-flash safeguard: keep <body> dark when <html>.dark is set before <body> parses.
+   (core.js also adds .dark to <body> once the DOM is ready.) */
+html.dark body { background: #0f172a !important; color: #e2e8f0 !important; }

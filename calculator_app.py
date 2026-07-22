@@ -2,7 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Calculator 404 - حاسبة قطونيل الذكية
+SmartCalc Pro
 Desktop Application Version - الإصدار الكامل
 """
 
@@ -17,7 +17,7 @@ from datetime import datetime
 class Calculator404:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("حاسبة قطونيل الذكية - Calculator 404")
+        self.root.title("SmartCalc Pro")
         self.root.geometry("650x750")
         self.root.resizable(True, True)
         
@@ -132,7 +132,7 @@ class Calculator404:
         
         title_label = tk.Label(
             title_container, 
-            text=f"{self.icons['calculator']} حاسبة قطونيل الذكية - Calculator 404",
+            text=f"{self.icons['calculator']} SmartCalc Pro",
             font=self.fonts['title'],
             bg=self.colors['primary'],
             fg=self.colors['white']
@@ -254,7 +254,7 @@ class Calculator404:
             
     def show_welcome_message(self):
         """عرض رسالة الترحيب"""
-        self.status_var.set("🎉 مرحباً بك في حاسبة قطونيل الذكية!")
+        self.status_var.set("🎉 مرحباً بك في SmartCalc Pro!")
         self.root.after(3000, lambda: self.status_var.set("جاهز للاستخدام"))
         
     def add_button_hover_effects(self, button, normal_color, hover_color):
