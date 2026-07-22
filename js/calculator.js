@@ -1,45 +1,42 @@
-// calculator.js - Calculator logic
+// calculator.js - Calculator logic (bilingual)
 
 document.addEventListener('DOMContentLoaded', () => {
-  const $ = window.$;
-  const $$ = window.$$;
   const calcDisplay = document.getElementById('calcDisplay');
   const calcExpression = document.getElementById('calcExpression');
   const historyList = document.getElementById('historyList');
   let calcHistory = JSON.parse(localStorage.getItem('calcHistory')) || [];
+  let calcErrored = false;
 
-  function formatCurrency(num) {
-    return new Intl.NumberFormat('ar-EG', { style: 'currency', currency: 'EGP', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(num);
-  }
+  const T = (k) => (window.t ? window.t(k) : k);
+
   function showErrorState() {
-    if (calcDisplay) {
-      calcDisplay.classList.add('text-primary', 'bg-red-500/10');
-    }
+    if (calcDisplay) calcDisplay.classList.add('text-primary', 'bg-red-500/10');
   }
   function clearErrorState() {
-    if (calcDisplay) {
-      calcDisplay.classList.remove('text-primary', 'bg-red-500/10');
-    }
+    if (calcDisplay) calcDisplay.classList.remove('text-primary', 'bg-red-500/10');
   }
   function updateCalcHistoryList() {
-    if (historyList) {
-      historyList.innerHTML = calcHistory.length > 0 ? calcHistory.slice().reverse().map(item => `
+    if (!historyList) return;
+    historyList.innerHTML = calcHistory.length > 0
+      ? calcHistory.slice().reverse().map(item => `
         <div class="p-2 rounded-md bg-gray-100 dark:bg-gray-700/50 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer" onclick="populateDisplayFromResult('${item.result}')">
           <div class="text-gray-500 dark:text-gray-400 text-xs font-mono truncate text-right">${item.expr} =</div>
           <div class="font-bold text-lg font-mono text-right">${item.result}</div>
-        </div>`).join('') : '<p class="text-gray-500 text-center py-4">لا توجد عمليات محفوظة</p>';
-    }
+        </div>`).join('')
+      : `<p class="text-gray-500 text-center py-4">${T('no_history')}</p>`;
   }
   function handleCalcInput(input) {
     if (!calcDisplay) return;
     clearErrorState();
     if (input === 'C') {
       calcDisplay.value = '0';
+      calcErrored = false;
       if (calcExpression) calcExpression.textContent = '';
     } else if (input === 'backspace') {
+      if (calcErrored) { calcDisplay.value = '0'; calcErrored = false; return; }
       calcDisplay.value = calcDisplay.value.length > 1 ? calcDisplay.value.slice(0, -1) : '0';
     } else if (input === '=') {
-      if (calcDisplay.value === 'خطأ') return;
+      if (calcErrored) return;
       const expr = calcDisplay.value.replace(/([0-9])%/g, "($1/100)");
       try {
         if (/[+\-*/.]{2,}/.test(expr)) throw "Invalid format";
@@ -53,13 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCalcHistoryList();
       } catch (error) {
         showErrorState();
-        calcDisplay.value = 'خطأ';
+        calcDisplay.value = T('calc_error');
+        calcErrored = true;
       }
     } else {
-      if (calcDisplay.value === '0' || calcDisplay.value === 'خطأ') calcDisplay.value = '';
+      if (calcDisplay.value === '0' || calcErrored) calcDisplay.value = '';
+      calcErrored = false;
       calcDisplay.value += input;
     }
   }
+
   const calcButtons = document.getElementById('calcButtons');
   if (calcButtons) {
     calcButtons.addEventListener('click', e => {
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       handleCalcInput(button.dataset.value || button.dataset.op);
     });
   }
-  
+
   document.addEventListener('keydown', (e) => {
     const calculatorTab = document.getElementById('calculator');
     if (!calculatorTab?.classList.contains('active')) return;
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       handleCalcInput(keyMap[e.key] || e.key);
     }
   });
-  
+
   const clearHistoryBtn = document.getElementById('clearHistoryBtn');
   if (clearHistoryBtn) {
     clearHistoryBtn.addEventListener('click', () => {
@@ -87,16 +87,16 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCalcHistoryList();
     });
   }
-  
+
   window.populateDisplayFromResult = (result) => {
-    if (calcDisplay) {
-      calcDisplay.value = result;
-      clearErrorState();
-    }
+    if (calcDisplay) { calcDisplay.value = result; calcErrored = false; clearErrorState(); }
   };
-  
-  // Initialize
-  setTimeout(() => {
+
+  // Re-render history and drop a stale error word when the language changes.
+  document.addEventListener('languagechange', () => {
+    if (calcErrored) { calcDisplay.value = '0'; calcErrored = false; clearErrorState(); }
     updateCalcHistoryList();
-  }, 100);
+  });
+
+  setTimeout(updateCalcHistoryList, 100);
 });
