@@ -18,6 +18,16 @@ SmartCalc Pro is a lightweight web app (with an optional Windows desktop edition
 
 It ships in **two languages** (Arabic & English) with a one-click switcher that also flips the page direction (RTL ⇄ LTR), and a **dark / light theme** that remembers your choice.
 
+## 📸 Screenshots
+
+| Calculator · Light · العربية | Shift Closeout · Dark · العربية |
+|:---:|:---:|
+| ![SmartCalc Pro calculator, light theme, Arabic](https://pub.hyperagent.com/api/published/pbf01KY5CSS7Z_EQCK5E5580Z59DT2/01-calculator-light-ar.png) | ![SmartCalc Pro shift closeout report, dark theme, Arabic](https://pub.hyperagent.com/api/published/pbf01KY5CSSES_P6KDW3EXPAV7S6S4/02-shift-dark-ar.png) |
+
+| Marketing ROI · Light · English (LTR) |
+|:---:|
+| ![SmartCalc Pro marketing ROI calculator, light theme, English](https://pub.hyperagent.com/api/published/pbf01KY5CSSR1_X7WA9YEQXWQ6WPJY/03-roi-light-en.png) |
+
 ## 🧰 Features
 
 | Tool | What it does |
